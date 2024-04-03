@@ -1,0 +1,19 @@
+import requests
+
+def get_recipes(query):
+    # Make GET request to Flask API
+    url = f'http://localhost:5000/recipes?q={query}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        for idx, recipe in enumerate(data):
+            print(f"Recipe {idx + 1}: {recipe['label']}")
+            print(f"URL: {recipe['url']}")
+            print()
+    else:
+        print("Failed to fetch recipes")
+
+if __name__ == '__main__':
+    query = input("Enter your recipe query: ")
+    get_recipes(query)
